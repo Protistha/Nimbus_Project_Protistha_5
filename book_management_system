@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+
+/* ---------- STRUCTURES ---------- */
+
+struct books {
+    int id;
+    char date[12];
+    char book_name[100];
+    char author_name[100];
+} bookrecords;
+
+struct student {
+    int id;
+    char student_name[100];
+    int student_rollno;
+    char student_class[20];
+    char book_name[100];
+    char issue_date[12];
+    char due_date[12];
+} studentrecords;
