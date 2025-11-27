@@ -3,7 +3,7 @@
 #include <string.h>
 #include <time.h>
 
-/* ---------- STRUCTURES ---------- */
+// STRUCTURES  
 
 struct books {
     int id;
@@ -21,3 +21,65 @@ struct student {
     char issue_date[12];
     char due_date[12];
 } studentrecords;
+FILE *file_pointer;
+
+void clearScreen() {
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
+}
+
+void trim(char *s) {
+    s[strcspn(s, "\n")] = '\0';
+}
+
+// FUNCTION DECLARATIONS 
+
+void add_book();
+void delete_book();
+void display_books_list();
+void issue_book();
+void issued_books_list();
+
+// MAIN MENU LOOP
+
+int main() {
+    int choice;
+
+    while (1) {
+        clearScreen();
+        printf("<<----- Library Book Management System ----->>\n\n");
+        printf("1. Issue Book\n");
+        printf("2. Add New Book\n");
+        printf("3. Delete Book\n");
+        printf("4. Display Books List\n");
+        printf("5. Issued Books List\n");
+        printf("0. Exit\n\n");
+
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        getchar();   // Remove leftover newline
+
+        switch (choice) {
+            case 1: issue_book(); break;
+            case 2: add_book(); break;
+            case 3: delete_book(); break;
+            case 4: display_books_list(); break;
+            case 5: issued_books_list(); break;
+            case 0:
+                printf("Exiting...\n");
+                exit(0);
+            default:
+                printf("Invalid choice! Try again.\n");
+        }
+
+        printf("\nPress ENTER to continue...");
+        getchar();
+    }
+
+    return 0;
+}
+
+
