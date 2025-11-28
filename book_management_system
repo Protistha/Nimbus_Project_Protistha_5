@@ -218,4 +218,53 @@ void delete_book() {
     else
         printf("Book not found.\n");
 }
+/* ---------- DISPLAY BOOKS LIST ---------- */
 
+void display_books_list() {
+    clearScreen();
+    printf("<<----- Books List ----->>\n\n");
+
+    file_pointer = fopen("books.txt", "rb");
+    if (!file_pointer) {
+        printf("No books available.\n");
+        return;
+    }
+
+    printf("%-10s %-30s %-20s %-12s\n",
+           "ID", "Book Name", "Author", "Added Date");
+
+    while (fread(&bookrecords, sizeof(bookrecords), 1, file_pointer) == 1) {
+        printf("%-10d %-30s %-20s %-12s\n",
+               bookrecords.id, bookrecords.book_name,
+               bookrecords.author_name, bookrecords.date);
+    }
+
+    fclose(file_pointer);
+}
+
+/* ---------- ISSUED BOOKS LIST ---------- */
+
+void issued_books_list() {
+    clearScreen();
+    printf("<<----- Issued Books ----->>\n\n");
+
+    file_pointer = fopen("issue.txt", "rb");
+    if (!file_pointer) {
+        printf("No books issued yet.\n");
+        return;
+    }
+
+    printf("%-10s %-30s %-10s %-10s %-30s %-12s %-12s\n",
+           "ID", "Student Name", "Class", "Roll",
+           "Book Name", "Issue Date", "Due Date");
+
+    while (fread(&studentrecords, sizeof(studentrecords), 1, file_pointer) == 1) {
+        printf("%-10d %-30s %-10s %-10d %-30s %-12s %-12s\n",
+               studentrecords.id, studentrecords.student_name,
+               studentrecords.student_class, studentrecords.student_rollno,
+               studentrecords.book_name, studentrecords.issue_date,
+               studentrecords.due_date);
+    }
+
+    fclose(file_pointer);
+}
